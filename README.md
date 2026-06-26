@@ -102,7 +102,36 @@ Our framework decomposes complex trading tasks into specialized roles.
 
 ## Installation and CLI
 
-### Installation
+> **Package manager: [`uv`](https://docs.astral.sh/uv/).**
+> All deps live in `pyproject.toml`; `uv.lock` pins them. Run everything with
+> `uv run <cmd>` — never `pip install` or `python -m venv`. If you are an
+> AI coding agent, see [`AGENTS.md`](AGENTS.md) before making changes.
+
+### Installation (with uv — recommended)
+
+Clone TradingAgents:
+```bash
+git clone https://github.com/TauricResearch/TradingAgents.git
+cd TradingAgents
+```
+
+Sync deps into a managed `.venv` (Python version is pinned in `.python-version`):
+```bash
+uv sync --extra dev          # add dev extras (pytest + ruff)
+cp .env.example .env         # then fill in API keys
+```
+
+Run the CLI:
+```bash
+uv run tradingagents
+```
+
+Add other extras as needed (e.g. AWS Bedrock):
+```bash
+uv sync --extra bedrock --extra dev
+```
+
+### Installation (with conda / pip — legacy, still works)
 
 Clone TradingAgents:
 ```bash
@@ -118,7 +147,7 @@ conda activate tradingagents
 
 Install the package and its dependencies:
 ```bash
-pip install .
+pip install ".[dev]"
 ```
 
 ### Docker
